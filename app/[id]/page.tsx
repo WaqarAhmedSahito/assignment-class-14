@@ -4,10 +4,12 @@ interface DynamicBookProps {
     };
 }
 
-const DynamicBook = async (props: DynamicBookProps) => {
+const DynamicBook = async ({ params }:  DynamicBookProps) => {
     try {
+		const { id } = await params
+
         const url = await fetch(
-            `https://simple-books-api.glitch.me/books/${props.params.id}`
+            `https://simple-books-api.glitch.me/books/${id}`
         );
         const res = await url.json();
 
@@ -21,7 +23,7 @@ const DynamicBook = async (props: DynamicBookProps) => {
 
         return (
             <h1 className="pl-5 text-5xl">
-                {props.params.id} <br />
+                {id} <br />
                 {res.name} <br />
                 {res.author} <br />
             </h1>
